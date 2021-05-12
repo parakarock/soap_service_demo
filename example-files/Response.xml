@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:GetCourseDetailsResponse
+	xmlns:xs="http://in12minutes.com/courses" 
+	xsi:schemaLocation="http://in12minutes.com/courses course-details.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<xs:CourseDetails>
+		<xs:id>12</xs:id>
+		<xs:name>NeMo Course</xs:name>
+		<xs:description>hello</xs:description>
+	</xs:CourseDetails>
+</xs:GetCourseDetailsResponse>
