@@ -2,7 +2,7 @@
 pipeline {
     agent any
     environment {
-        // registry = 'hub.docker.com'
+        // registry = 'hub.docker.comm'
         credential = 'nemo_dockerhub'
         imageName = 'parakarock/soap_service_demo'
         version_tag = 'latest'
