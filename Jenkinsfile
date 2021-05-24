@@ -87,15 +87,21 @@ pipeline {
     //         sh "docker run -d --rm -p 8081:8081 --env ENDPOINT_SERVICE_COURSE=http://172.18.0.2:8082/ws --network=soap_service soap_service_demo_client:latest"
     //     }
     //  }
-    //  stage('Deploy') {
-    //     agent {
-    //         label "mac"
-    //     }
-    //      steps {
-    //         sh ""
-    //         sh "docker run -d --rm -p 8081:8081 --env ENDPOINT_SERVICE_COURSE=http://172.18.0.2:8082/ws --network=soap_service soap_service_demo_client:latest"
-    //     }
-    //  }
+     stage('Deploy') {
+        agent {
+            label "mac"
+        }
+         steps {
+            git credentialsId: 'git_credential_soap_demo', url: 'https://github.com/parakarock/soap_service_demo'
+            script {
+                try{
+                    sh "kubectl apply -f ."
+                }catch(error){
+                    sh "kubectl create -f ."
+                }
+            }
+        }
+     }
     
         
     }  
