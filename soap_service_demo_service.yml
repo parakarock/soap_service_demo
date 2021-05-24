@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: soap-service-demo-service
+  namespace: jenkins
+spec:
+  type: NodePort
+  ports:
+    - port: 8082
+  selector:
+    app: soap-service-demo
