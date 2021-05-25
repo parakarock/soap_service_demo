@@ -95,17 +95,11 @@ pipeline {
              
             git credentialsId: 'git_credential_soap_demo', url: 'https://github.com/parakarock/soap_service_demo'
             script {
-                    withKubeConfig([credentialsId: 'kube',
-                    serverUrl: 'https://hub.docker.com/repository/docker/parakarock/soap_service_demo',
-                    namespace: 'jenkins'
-                    ]) {
-                        try{
+                    try{
                     sh "kubectl apply -f ."
                         }catch(error){
                     sh "kubectl create -f ."
-                }
-                    }
-                
+                }        
             }
         }
      }
