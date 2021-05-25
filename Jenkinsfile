@@ -92,15 +92,15 @@ pipeline {
             label "mac"
         }
          steps {
-             
-            git credentialsId: 'git_credential_soap_demo', url: 'https://github.com/parakarock/soap_service_demo'
-            script {
-                    try{
-                    sh "kubectl apply -f ."
-                        }catch(error){
-                    sh "kubectl create -f ."
-                }        
-            }
+             sh "echo 'hello jenkins'"
+            // git credentialsId: 'git_credential_soap_demo', url: 'https://github.com/parakarock/soap_service_demo'
+            // script {
+            //         try{
+            //         sh "kubectl apply -f ."
+            //             }catch(error){
+            //         sh "kubectl create -f ."
+            //     }        
+            // }
         }
      }
 
