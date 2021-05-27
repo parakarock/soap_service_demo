@@ -98,7 +98,7 @@ pipeline {
             // git credentialsId: 'git_credential_soap_demo', url: 'https://github.com/parakarock/soap_service_demo'
             script {
                 sh "cd ~/Documents/kubernetes/jenkins-k8s"
-                sh "envsubst < soap_service_demo_client_deployment.yml > deployment.yml"
+                sh "envsubst < soap_service_demo_deployment.yml > deployment.yml"
                     try{
                     sh "kubectl apply -f deployment.yml"
                     sh "kubectl apply -f soap_service_demo_service.yml"
