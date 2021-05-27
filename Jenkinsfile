@@ -60,26 +60,27 @@ pipeline {
     //     }
         
     
-    // stage('Automate Test') {
-    //     steps {
-    //         git credentialsId: '402f609b-1df3-4acb-9836-d32f68d758df', url: 'https://github.com/parakarock/soap_service_demo_cypress.git'
+    stage('Automate Test') {
+        steps {
+            git credentialsId: '402f609b-1df3-4acb-9836-d32f68d758df', url: 'https://github.com/parakarock/soap_service_demo_cypress.git'
             
-    //         sh "npm install"
-    //         sh "docker-compose up -d"
-    //         sh "npm run test:demo"
-    //         sh "docker-compose down"
-    //     }
+            sh "npm install"
+            sh "envsubst < docker-compose_demo.yml > docker-compose.yml"
+            sh "docker-compose up -d"
+            sh "npm run test:demo"
+            sh "docker-compose down"
+        }
         
-    //     // post {
-    //     //         // If Maven was able to run the tests, even if some of the test
-    //     //         // failed, record the test results and archive the jar file.
+        // post {
+        //         // If Maven was able to run the tests, even if some of the test
+        //         // failed, record the test results and archive the jar file.
                 
-    //     //         success {
-    //     //             archiveArtifacts 'cypress/videos/*.spec.js.mp4'
-    //     //         }
-    //     //     }
+        //         success {
+        //             archiveArtifacts 'cypress/videos/*.spec.js.mp4'
+        //         }
+        //     }
         
-    // }
+    }
     
     //  stage('Deploy') {
     //      steps {
@@ -97,10 +98,13 @@ pipeline {
             // git credentialsId: 'git_credential_soap_demo', url: 'https://github.com/parakarock/soap_service_demo'
             script {
                 sh "cd ~/Documents/kubernetes/jenkins-k8s"
+                sh "envsubst < soap_service_demo_client_deployment.yml > deployment.yml"
                     try{
-                    sh "kubectl apply -f ."
+                    sh "kubectl apply -f deployment.yml"
+                    sh "kubectl apply -f soap_service_demo_service.yml"
                         }catch(error){
-                    sh "kubectl create -f ."
+                    sh "kubectl create -f deployment.yml"
+                    sh "kubectl create -f soap_service_demo_service.yml"
                 }        
             }
         }
